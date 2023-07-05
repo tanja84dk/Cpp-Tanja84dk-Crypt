@@ -8,11 +8,6 @@
 namespace Tanja84dk::crypt::base64
 {
     std::string decode(const std::string &input_data);
-    std::string encode(const std::string &data);
-    void myBase64Encoding(void);
-    void myBase64Encoding(const std::string &input_data);
-    void myBase64Decoding(void);
-    void myBase64Decoding(const std::string &input_data);
-    void myBase64DecodingString(void);
+    std::string encode(const std::string &input_data);
 }
 #endif // TANJA84DK_CRYPT_BASE64_BASE64_h
