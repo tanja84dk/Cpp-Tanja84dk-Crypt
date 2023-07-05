@@ -6,15 +6,13 @@ CPMAddPackage(
 )
 
 if(cpp_base64_ADDED)
-  add_library(cpp-base64 ${cpp_base64_SOURCE_DIR}/base64.cpp)
+  add_library(cpp-base64 STATIC ${cpp_base64_SOURCE_DIR}/base64.cpp)
 
   set_target_properties(cpp-base64
     PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-	#VERSION ${cpp_base64_VERSION}
-	#SOVERSION ${cpp_base64_VERSION_MAJOR}
   )
 
   target_include_directories(cpp-base64 PUBLIC ${cpp_base64_SOURCE_DIR})
