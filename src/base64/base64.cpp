@@ -1,5 +1,4 @@
 #include <Tanja84dk/crypt/base64/base64.h>
-
 #include <string>
 
 #include <base64.h>

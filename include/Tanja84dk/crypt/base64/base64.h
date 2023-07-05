@@ -3,8 +3,6 @@
 
 #include <string>
 
-#include <Tanja84dk/tools/tools.h>
-
 namespace Tanja84dk::crypt::base64
 {
     std::string decode(const std::string &input_data);
