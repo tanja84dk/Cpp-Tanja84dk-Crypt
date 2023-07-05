@@ -1,91 +1,41 @@
-
-
+#include <Tanja84dk/crypt/binary/binary.h>
 #include <iostream>
-#include <fstream>
+
 #include <string>
+#include <sstream>
 #include <vector>
 #include <bitset>
 
-#include <Tanja84dk/crypt/binary/binary.h>
-#include <Tanja84dk/tools/tools.h>
-
-template <size_t N>
-std::vector<std::bitset<N>> encoding(const char *input_filename)
+std::vector<std::bitset<8>> Tanja84dk::crypt::binary::encode(const std::string &input_data) noexcept
 {
-    std::string buffer_input_string;
 
-    std::vector<std::bitset<N>> binary_output_vector;
+    std::vector<std::bitset<8>> binary_output_vector = {};
+    binary_output_vector.clear();
     binary_output_vector.reserve(100);
 
-    std::ifstream file_handler(input_filename, std::ifstream::in);
-    file_handler.seekg(0, std::ios::end);
-    buffer_input_string.reserve(file_handler.tellg());
-    file_handler.seekg(0, std::ios::beg);
-    buffer_input_string.assign((std::istreambuf_iterator<char>(file_handler)),
-                               std::istreambuf_iterator<char>());
-
-    for (std::size_t i = 0; i < buffer_input_string.size(); i++)
+    for (std::size_t i = 0; i < input_data.size(); i++)
     {
-        binary_output_vector.push_back(std::bitset<8>(buffer_input_string.c_str()[i]));
+        binary_output_vector.push_back(std::bitset<8>(input_data.c_str()[i]));
     }
 
     return binary_output_vector;
 }
 
-void encoding(const std::string &data)
+std::string Tanja84dk::crypt::binary::decode(const std::string &input_data) noexcept
 {
-    std::vector<std::bitset<8>> binaryOutputVector;
-    std::string outputFilename;
+    std::stringstream input_buffer_stringstream = {};
+    std::string output_data_string = {};
+    input_buffer_stringstream.clear();
 
-    for (std::size_t i = 0; i < int(data.size()); i++)
+    input_buffer_stringstream << input_data;
+
+    while (input_buffer_stringstream.good())
     {
-        binaryOutputVector.push_back(std::bitset<8>(data.c_str()[i]));
+        std::bitset<8> bits;
+        input_buffer_stringstream >> bits;
+        char bits_decoded_char = char(bits.to_ulong());
+        output_data_string += bits_decoded_char;
     }
 
-    outputFilename = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Encoded-8Bit-Binary.txt";
-
-    if (!Tanja84dk::tools::file_exists(outputFilename))
-    {
-        Tanja84dk::tools::write_file(binaryOutputVector, outputFilename);
-        printf("The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str());
-    }
+    return output_data_string;
 }
-
-/*
-void decoding_string(const std::string &inputFilename)
-{
-
-    std::string outputFilename;
-    std::string buffer_input_string;
-    std::string outputData;
-    outputFilename = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Binary-Decoded.txt";
-
-    if (Tanja84dk::tools::file_exists(inputFilename) == true)
-    {
-        std::ifstream inputFileHandler(inputFilename, std::ifstream::in);
-        inputFileHandler.seekg(0, std::ios::end);
-        buffer_input_string.reserve(inputFileHandler.tellg());
-        inputFileHandler.seekg(0, std::ios::beg);
-        buffer_input_string.assign((std::istreambuf_iterator<char>(inputFileHandler)),
-                                   std::istreambuf_iterator<char>());
-
-        std::stringstream binaryStringStream(buffer_input_string);
-
-        while (binaryStringStream.good())
-        {
-            std::bitset<8> bits;
-            binaryStringStream >> bits;
-            char characterDecoded = char(bits.to_ulong());
-            outputData += characterDecoded;
-        }
-
-        printf("\n%s\n", outputData.c_str());
-    }
-
-    if (Tanja84dk::tools::file_exists(outputFilename) == false)
-    {
-        Tanja84dk::tools::write_file(outputData, outputFilename);
-        printf("The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str());
-    }
-}
-*/
