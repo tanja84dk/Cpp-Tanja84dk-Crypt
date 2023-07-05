@@ -1,29 +1,29 @@
-# CMakeLists.txt for Tools Collection
+# CMakeLists.txt for Crypt Collection
 #
 # © 2021-2023 by Tanja84DK
 
-if (TARGET tanja84dk_crypt OR TARGET Tanja84dk::crypt)
+if (TARGET tanja84dk_crypt)
 	return()
 endif()
 
 cmake_minimum_required(VERSION 3.8)
 
-project(tanja84dk_crypt VERSION 0.1.0)
+project(tanja84dk_crypt LANGUAGES CXX VERSION 0.1.0)
 
-set(BUILD_SHARED_LIBS ON)
+set(BUILD_SHARED_LIBS OFF)
 
 set(tanja84dk_crypt_BUILD_TESTING OFF)
 
 set(tanja84dk_crypt_HEADERS
-  include/Tanja84dk/crypt/base32/base32.h
   include/Tanja84dk/crypt/base64/base64.h
   include/Tanja84dk/crypt/binary/binary.h
+  include/Tanja84dk/crypt/ceasar/ceasar.h
 )
 
 set(tanja84dk_crypt_SOURCES
-  src/crypt.cpp
-  src/base32/base32.cpp
+  src/base64/base64.cpp
   src/binary/binary.cpp
+  src/ceasar/ceasar.cpp
 )
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -32,9 +32,11 @@ include(cmake/CPM.cmake)
 
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 	find_package(tanja84dk_tools REQUIRED)
+	find_package(cpp-base64 REQUIRED)
 else()
 	include(CMakeFindDependencyMacro)
 	find_dependency(tanja84dk_tools)
+	find_dependency(cpp-base64)
 endif()
 
 add_library(tanja84dk_crypt ${tanja84dk_crypt_SOURCES} ${tanja84dk_crypt_HEADERS})
@@ -44,6 +46,7 @@ add_library(Tanja84dk::crypt ALIAS tanja84dk_crypt)
 target_link_libraries(tanja84dk_crypt
 	PRIVATE
 		Tanja84dk::tools
+		cpp-base64
 )
 
 target_include_directories(tanja84dk_crypt
