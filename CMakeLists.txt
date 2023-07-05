@@ -15,12 +15,14 @@ set(BUILD_SHARED_LIBS OFF)
 set(tanja84dk_crypt_BUILD_TESTING OFF)
 
 set(tanja84dk_crypt_HEADERS
+  include/Tanja84dk/crypt/base32/base32.h
   include/Tanja84dk/crypt/base64/base64.h
   include/Tanja84dk/crypt/binary/binary.h
   include/Tanja84dk/crypt/ceasar/ceasar.h
 )
 
 set(tanja84dk_crypt_SOURCES
+  src/base32/base32.cpp
   src/base64/base64.cpp
   src/binary/binary.cpp
   src/ceasar/ceasar.cpp
@@ -31,11 +33,9 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(cmake/CPM.cmake)
 
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
-	find_package(tanja84dk_tools REQUIRED)
 	find_package(cpp-base64 REQUIRED)
 else()
 	include(CMakeFindDependencyMacro)
-	find_dependency(tanja84dk_tools)
 	find_dependency(cpp-base64)
 endif()
 
@@ -45,7 +45,6 @@ add_library(Tanja84dk::crypt ALIAS tanja84dk_crypt)
 
 target_link_libraries(tanja84dk_crypt
 	PRIVATE
-		Tanja84dk::tools
 		cpp-base64
 )
 
@@ -60,7 +59,7 @@ target_include_directories(tanja84dk_crypt
 
 target_compile_features(tanja84dk_crypt
 	PRIVATE
-		cxx_std_20
+		cxx_std_17
 )
 
 set_target_properties(tanja84dk_crypt
