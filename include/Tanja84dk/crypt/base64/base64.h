@@ -7,8 +7,8 @@
 
 namespace Tanja84dk::crypt::base64
 {
-    std::string decode(const std::string &input_data) noexcept;
-    std::string encode(const std::string &input_data) noexcept;
+    const std::string decode(const std::string &input_data) noexcept;
+    const std::string encode(const std::string &input_data) noexcept;
     std::ofstream decode(const std::ifstream &input_file_handler) noexcept;
     std::ofstream encode(const std::ifstream &input_file_handler) noexcept;
 }
