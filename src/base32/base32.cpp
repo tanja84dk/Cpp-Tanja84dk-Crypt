@@ -28,7 +28,7 @@ std::string Tanja84dk::crypt::base32::encode(const std::string &input_data) noex
     Encoder.MessageEnd();
 
     CryptoPP::word64 size_word64 = Encoder.MaxRetrievable();
-    if (size_word64)
+    if (size_word64 && size_word64 <= SIZE_MAX)
     {
         encoded_string.resize(size_word64);
         Encoder.Get((CryptoPP::byte *)&encoded_string[0], encoded_string.size());
