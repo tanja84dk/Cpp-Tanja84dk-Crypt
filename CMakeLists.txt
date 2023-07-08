@@ -10,9 +10,9 @@ cmake_minimum_required(VERSION 3.8)
 
 project(tanja84dk_crypt LANGUAGES CXX VERSION 0.1.0)
 
-set(BUILD_SHARED_LIBS OFF)
+option(BUILD_SHARED_LIBS OFF)
 
-set(tanja84dk_crypt_BUILD_TESTING OFF)
+option(tanja84dk_crypt_BUILD_TESTING OFF)
 
 set(tanja84dk_crypt_HEADERS
   include/Tanja84dk/crypt/licenses.h
@@ -33,12 +33,8 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 include(cmake/CPM.cmake)
 
-if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
-	find_package(cryptopp-cmake)
-else()
-	include(CMakeFindDependencyMacro)
-	find_dependency(cryptopp-cmake)
-endif()
+find_package(cryptopp-cmake REQUIRED QUIET)
+
 
 include(cmake/get_licenses.cmake)
 
@@ -56,6 +52,7 @@ target_include_directories(tanja84dk_crypt
 		$<INSTALL_INTERFACE:include>
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 		$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>
+		${CMAKE_CURRENT_SOURCE_DIR}/include
 
 	PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}
