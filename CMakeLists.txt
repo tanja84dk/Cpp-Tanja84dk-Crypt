@@ -33,11 +33,9 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(cmake/CPM.cmake)
 
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
-	find_package(cpp-base64 REQUIRED)
 	find_package(cryptopp-cmake)
 else()
 	include(CMakeFindDependencyMacro)
-	find_dependency(cpp-base64)
 	find_dependency(cryptopp-cmake)
 endif()
 
@@ -47,7 +45,6 @@ add_library(Tanja84dk::crypt ALIAS tanja84dk_crypt)
 
 target_link_libraries(tanja84dk_crypt
 	PRIVATE
-		cpp-base64
 		cryptopp
 )
 

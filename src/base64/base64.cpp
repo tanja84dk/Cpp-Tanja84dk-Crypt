@@ -4,40 +4,38 @@
 
 #include <base64.h>
 
-const std::string Tanja84dk::crypt::base64::decode(const std::string &input_data) noexcept
+std::string Tanja84dk::crypt::base64::decode(const std::string &input_data) noexcept
 {
-    return base64_decode(input_data);
-}
+    CryptoPP::Base64Decoder Decoder;
+    std::string decoded_string = {};
+    Decoder.Put((CryptoPP::byte *)input_data.data(), input_data.size());
+    Decoder.MessageEnd();
 
-const std::string Tanja84dk::crypt::base64::encode(const std::string &input_data) noexcept
-{
-    return base64_encode(input_data);
-}
+    CryptoPP::word64 size_word64 = Decoder.MaxRetrievable();
 
-std::ofstream Tanja84dk::crypt::base64::decode(const std::ifstream &input_file_handler) noexcept
-{
-    std::stringstream buffer_input_sstream = {};
-    buffer_input_sstream.clear();
-    std::ofstream output_file_handler;
-    while (input_file_handler.good())
+    if (size_word64 && size_word64 <= SIZE_MAX)
     {
-        buffer_input_sstream << input_file_handler.rdbuf();
+        decoded_string.resize(size_word64);
+        Decoder.Get((CryptoPP::byte *)&decoded_string[0], decoded_string.size());
     }
-    base64_decode(buffer_input_sstream.str());
 
-    return output_file_handler;
+    return decoded_string;
 }
 
-std::ofstream Tanja84dk::crypt::base64::encode(const std::ifstream &input_file_handler) noexcept
+std::string Tanja84dk::crypt::base64::encode(const std::string &input_data) noexcept
 {
-    std::stringstream buffer_input_sstream = {};
-    buffer_input_sstream.clear();
-    std::ofstream output_file_handler;
-    while (input_file_handler.good())
-    {
-        buffer_input_sstream << input_file_handler.rdbuf();
-    }
-    base64_decode(buffer_input_sstream.str());
+    CryptoPP::Base64Encoder Encoder;
+    std::string encoded_string = {};
+    Encoder.Put((CryptoPP::byte *)input_data.data(), input_data.size());
+    Encoder.MessageEnd();
 
-    return output_file_handler;
+    CryptoPP::word64 size_word64 = Encoder.MaxRetrievable();
+
+    if (size_word64 && size_word64 <= SIZE_MAX)
+    {
+        encoded_string.resize(size_word64);
+        Encoder.Get((CryptoPP::byte *)&encoded_string[0], encoded_string.size());
+    }
+
+    return encoded_string;
 }
