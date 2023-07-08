@@ -15,7 +15,8 @@ The reason I made it in to a collection instead of seperate were I saw myself ne
 ### 2.1 Required libraries
 
 - CPM - CMake dependency management 0.38.1
-- cpp-base64 by ReneNyffenegger
+- cryptopp-cmake - CMake Project for Crypto++ 8.8.0
+- cryptopp - Crypto++ Library 8.8.0
 
 ### 2.2 Requiring libraries
 
@@ -23,14 +24,16 @@ CMake dependency management is used to download the required libraries for compi
 
 By default its downloading the libraries to the build folder and is storing them within a folder called \_deps
 
-About cpp-base64 that has a costum configuration in Findcpp-base64.cmake to setup the library for cmake since its not developed as a cmake project. And its configured to use it as a static library since the permissive license.
+About Crypto++ that is pulled from within the cryptopp-cmake project since Crypto++ does not distribute as a cmake project and the Crypto++ maintainer is also endorcing and forwarding to the cryptopp-cmake repo as the official for cmake projects [Wiki CMake Page](https://www.cryptopp.com/wiki/CMake#:~:text=using%20Android%20options-,Downloads,-cryptopp%2Dcmake%20%2D%20GitHub)
 
 ## 3. Licenses
 
 - CPM is licensed under MIT [CPM 0.38.1 License](https://github.com/cpm-cmake/CPM.cmake/blob/v0.38.1/LICENSE)
-- cpp-base64 by ReneNyffenegger looks like a costum permissive license [cpp-base64 by ReneNyffenegger License](https://github.com/ReneNyffenegger/cpp-base64/blob/82147d6d89636217b870f54ec07ddd3e544d5f69/LICENSE)
+- cryptopp-cmake is licensed under BSD 3-Clause License [cryptopp-cmake 8.8.0 License](https://github.com/abdes/cryptopp-cmake/blob/CRYPTOPP_8_8_0/LICENSE)
+- Crypto++ Library is licensed under Boost Software License - Version 1.0[Crypto++ 8.8.0 License](https://github.com/weidai11/cryptopp/blob/CRYPTOPP_8_8_0/License.txt)
 
 ## 4. Credit
 
 - CPM for the depentencies manager [Github](https://github.com/cpm-cmake/CPM.cmake)
-- cpp-base64 from ReneNyffenegger for the base64 library [Github](https://github.com/ReneNyffenegger/cpp-base64/) [Website/Docs](https://renenyffenegger.ch/notes/development/Base64/Encoding-and-decoding-base-64-with-cpp/)
+- abdes for the cmake project for Crypto++ Library[Github](https://github.com/abdes/cryptopp-cmake)
+- Crypto++ and the comunity for the Crypto++ Library collection[Github](https://github.com/weidai11/cryptopp)
