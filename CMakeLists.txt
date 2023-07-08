@@ -15,6 +15,7 @@ set(BUILD_SHARED_LIBS OFF)
 set(tanja84dk_crypt_BUILD_TESTING OFF)
 
 set(tanja84dk_crypt_HEADERS
+  include/Tanja84dk/crypt/licenses.h
   include/Tanja84dk/crypt/base32/base32.h
   include/Tanja84dk/crypt/base64/base64.h
   include/Tanja84dk/crypt/binary/binary.h
@@ -55,6 +56,7 @@ target_include_directories(tanja84dk_crypt
 	PUBLIC
 		$<INSTALL_INTERFACE:include>
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+		$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>
 
 	PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}
