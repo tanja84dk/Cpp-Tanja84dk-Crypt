@@ -41,7 +41,6 @@ else()
 endif()
 
 include(cmake/get_licenses.cmake)
-configure_file(${PROJECT_NAME}_licenses_macro.h.in include/Tanja84dk/crypt/${PROJECT_NAME}_licenses_macro.h)
 
 add_library(tanja84dk_crypt ${tanja84dk_crypt_SOURCES} ${tanja84dk_crypt_HEADERS})
 
