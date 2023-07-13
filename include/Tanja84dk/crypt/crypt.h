@@ -6,4 +6,4 @@
 #include "binary/binary.h"
 #include "ceasar/ceasar.h"
 
-#endif // TANJA84DK_CRYPT_CRYPT_H
+#endif  // TANJA84DK_CRYPT_CRYPT_H
