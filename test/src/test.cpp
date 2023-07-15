@@ -6,20 +6,45 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-TEST_CASE("Get License for tanja84dk_crypt") {
-  REQUIRE(Tanja84dk::crypt::license::get_tanja84dk_crypt_license() == tanja84dk_crypt_LICENSE);
+/*
+TEST_CASE("Encode Base32") {
+    REQUIRE(Tanja84dk::crypt::base32::encode("") == "");
+    REQUIRE(Tanja84dk::crypt::base32::encode("f") == "MY======");
+    REQUIRE(Tanja84dk::crypt::base32::encode("fo") == "MZXQ====");
+    REQUIRE(Tanja84dk::crypt::base32::encode("foo") == "MZXW6===");
+    REQUIRE(Tanja84dk::crypt::base32::encode("foob") == "MZXW6YQ=");
+    REQUIRE(Tanja84dk::crypt::base32::encode("fooba") == "MZXW6YTB");
+    REQUIRE(Tanja84dk::crypt::base32::encode("foobar") == "MZXW6YTBOI======");
 }
 
-// Compile & run:
-// - g++ -std=c++14 -Wall -I$(CATCH_SINGLE_INCLUDE) -o 010-TestCase 010-TestCase.cpp && 010-TestCase --success
-// - cl -EHsc -I%CATCH_SINGLE_INCLUDE% 010-TestCase.cpp && 010-TestCase --success
 
-// Expected compact output (all assertions):
-//
-// prompt> 010-TestCase --reporter compact --success
-// 010-TestCase.cpp:14: failed: Factorial(0) == 1 for: 0 == 1
-// 010-TestCase.cpp:18: passed: Factorial(1) == 1 for: 1 == 1
-// 010-TestCase.cpp:19: passed: Factorial(2) == 2 for: 2 == 2
-// 010-TestCase.cpp:20: passed: Factorial(3) == 6 for: 6 == 6
-// 010-TestCase.cpp:21: passed: Factorial(10) == 3628800 for: 3628800 (0x375f00) == 3628800 (0x375f00)
-// Failed 1 test case, failed 1 assertion.
+TEST_CASE("Decode Base32") {
+    REQUIRE(Tanja84dk::crypt::base32::decode("") == "");
+    REQUIRE(Tanja84dk::crypt::base32::decode("MY======") == "f");
+    REQUIRE(Tanja84dk::crypt::base32::decode("MZXQ====") == "fo");
+    REQUIRE(Tanja84dk::crypt::base32::decode("MZXW6===") == "foo");
+    REQUIRE(Tanja84dk::crypt::base32::decode("MZXW6YQ=") == "foob");
+    REQUIRE(Tanja84dk::crypt::base32::decode("MZXW6YTB") == "fooba");
+    REQUIRE(Tanja84dk::crypt::base32::decode("MZXW6YTBOI======") == "foobar");
+}
+*/
+
+TEST_CASE("Encode Base64") {
+    CHECK(Tanja84dk::crypt::base64::encode("") == "");
+    CHECK(Tanja84dk::crypt::base64::encode("f") == "Zg==");
+    CHECK(Tanja84dk::crypt::base64::encode("fo") == "Zm8=");
+    CHECK(Tanja84dk::crypt::base64::encode("foo") == "Zm9v");
+    CHECK(Tanja84dk::crypt::base64::encode("foob") == "Zm9vYg==");
+    CHECK(Tanja84dk::crypt::base64::encode("fooba") == "Zm9vYmE=");
+    CHECK(Tanja84dk::crypt::base64::encode("foobar") == "Zm9vYmFy");
+}
+
+TEST_CASE("Decode Base64") {
+    CHECK(Tanja84dk::crypt::base64::decode("") == "");
+    CHECK(Tanja84dk::crypt::base64::decode("Zg==") == "f");
+    CHECK(Tanja84dk::crypt::base64::decode("Zm8=") == "fo");
+    CHECK(Tanja84dk::crypt::base64::decode("Zm9v") == "foo");
+    CHECK(Tanja84dk::crypt::base64::decode("Zm9vYg==") == "foob");
+    CHECK(Tanja84dk::crypt::base64::decode("Zm9vYmE=") == "fooba");
+    CHECK(Tanja84dk::crypt::base64::decode("Zm9vYmFy") == "foobar");
+}
