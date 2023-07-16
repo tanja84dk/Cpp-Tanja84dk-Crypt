@@ -3,8 +3,6 @@
 
 #include <Tanja84dk/crypt/pxx.h>
 
-#include <fstream>
-#include <iostream>
 #include <string>
 
 namespace Tanja84dk {
