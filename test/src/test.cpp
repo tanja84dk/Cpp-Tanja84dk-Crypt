@@ -37,6 +37,8 @@ TEST_CASE("Encode Base64") {
     CHECK(Tanja84dk::crypt::base64::encode("foob") == "Zm9vYg==");
     CHECK(Tanja84dk::crypt::base64::encode("fooba") == "Zm9vYmE=");
     CHECK(Tanja84dk::crypt::base64::encode("foobar") == "Zm9vYmFy");
+    CHECK(Tanja84dk::crypt::base64::encode("Welcome to Ubuntu 22.04.2 LTS (GNU/Linux 5.15.0-76-generic x86_64)") ==
+          "V2VsY29tZSB0byBVYnVudHUgMjIuMDQuMiBMVFMgKEdOVS9MaW51eCA1LjE1LjAtNzYtZ2VuZXJpYyB4ODZfNjQp");
 }
 
 TEST_CASE("Decode Base64") {
@@ -47,4 +49,7 @@ TEST_CASE("Decode Base64") {
     CHECK(Tanja84dk::crypt::base64::decode("Zm9vYg==") == "foob");
     CHECK(Tanja84dk::crypt::base64::decode("Zm9vYmE=") == "fooba");
     CHECK(Tanja84dk::crypt::base64::decode("Zm9vYmFy") == "foobar");
+    CHECK(Tanja84dk::crypt::base64::decode(
+              "V2VsY29tZSB0byBVYnVudHUgMjIuMDQuMiBMVFMgKEdOVS9MaW51eCA1LjE1LjAtNzYtZ2VuZXJpYyB4ODZfNjQp") ==
+          "Welcome to Ubuntu 22.04.2 LTS (GNU/Linux 5.15.0-76-generic x86_64)");
 }
