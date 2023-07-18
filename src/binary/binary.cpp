@@ -9,24 +9,29 @@
 
 using namespace Tanja84dk::crypt;
 
-Binary::Binary(const std::string &input_data) noexcept {
+Binary::Binary(const std::string& input_data) noexcept {
     this->input_data = input_data;
     this->input_data_length = input_data.size();
 }
 
 std::string Binary::encode() const noexcept {
-    // std::string output_data_string = {};
+    std::string output_data_string = {};
     std::vector<std::bitset<8>> buffer_data = this->encode_to_bits();
+    for (std::vector<std::bitset<8>>::iterator i = buffer_data.begin(); i != buffer_data.end(); i++) {
+        std::cout << *i << ' ';
+    }
     std::stringstream buffer_sstream = {};
 
-    for (auto it = buffer_data.begin(); it != buffer_data.end(); it++) {
+    for (std::vector<std::bitset<8>>::iterator it = buffer_data.begin(); it != buffer_data.end(); it++) {
         if (it != buffer_data.begin()) {
             buffer_sstream << " ";
         }
         buffer_sstream << *it;
     }
 
-    return buffer_sstream.str();
+    output_data_string = buffer_sstream.str();
+
+    return output_data_string;
 }
 
 std::vector<std::bitset<8>> Binary::encode_to_bits() const noexcept {
@@ -42,18 +47,32 @@ std::vector<std::bitset<8>> Binary::encode_to_bits() const noexcept {
 }
 
 std::string Binary::decode() const noexcept {
-    std::stringstream input_buffer_stringstream = {};
-    std::string output_data_string = {};
-    input_buffer_stringstream.clear();
+    std::string result;
+    std::bitset<8> bits;
 
-    input_buffer_stringstream << this->input_data;
+    std::stringstream sstream(this->input_data);
 
-    while (input_buffer_stringstream.good()) {
-        std::bitset<8> bits;
-        input_buffer_stringstream >> bits;
-        char bits_decoded_char = char(bits.to_ulong());
-        output_data_string += bits_decoded_char;
+    std::string bits_chunk;
+    while (sstream >> bits_chunk) {
+        bits = std::bitset<8>(bits_chunk);
+
+        char buffer_char = static_cast<char>(bits.to_ulong());
+        result.push_back(buffer_char);
     }
 
-    return output_data_string;
+    return result;
+}
+
+std::string Binary::binary_vector_string_to_ascii(const std::vector<std::string>& binary_strings) noexcept {
+    std::string result;
+    std::bitset<8> bits;
+
+    for (const std::string& binary_string : binary_strings) {
+        bits = std::bitset<8>(binary_string);
+
+        char ascii_char = static_cast<char>(bits.to_ulong());
+        result.push_back(ascii_char);
+    }
+
+    return result;
 }

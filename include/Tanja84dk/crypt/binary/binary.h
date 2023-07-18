@@ -16,19 +16,12 @@ class Binary : public Tanja84dk::crypt::EncoderBaseInterface {
     std::size_t input_data_length;
 
    public:
-    Binary(const std::string &input_data) noexcept;
+    Binary(const std::string& input_data) noexcept;
     std::string decode() const noexcept override;
     std::string encode() const noexcept override;
+    std::string binary_vector_string_to_ascii(const std::vector<std::string>& binary_strings) noexcept;
     std::vector<std::bitset<8>> encode_to_bits() const noexcept;
 };
-/*
-namespace binary {
-
-std::vector<std::bitset<8>> encode(const std::string &input_data) noexcept;
-std::string decode(const std::string &input_data) noexcept;
-
-}  // namespace binary
-*/
 }  // namespace crypt
 }  // namespace Tanja84dk
 
