@@ -20,7 +20,7 @@ std::string Binary::encode() const noexcept {
     for (std::vector<std::bitset<8>>::iterator i = buffer_data.begin(); i != buffer_data.end(); i++) {
         std::cout << *i << ' ';
     }
-    std::stringstream buffer_sstream = {};
+    std::ostringstream buffer_sstream = {};
 
     for (std::vector<std::bitset<8>>::iterator it = buffer_data.begin(); it != buffer_data.end(); it++) {
         if (it != buffer_data.begin()) {
@@ -50,7 +50,7 @@ std::string Binary::decode() const noexcept {
     std::string result;
     std::bitset<8> bits;
 
-    std::stringstream sstream(this->input_data);
+    std::istringstream sstream(this->input_data);
 
     std::string bits_chunk;
     while (sstream >> bits_chunk) {
