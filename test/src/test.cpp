@@ -6,6 +6,14 @@
 
 #include <catch2/catch_test_macros.hpp>
 
+TEST_CASE("Binary Encode") {
+    CHECK(Tanja84dk::crypt::Binary("Hello").encode() == "01001000 01100101 01101100 01101100 01101111");
+}
+
+TEST_CASE("Binary Decode") {
+    CHECK(Tanja84dk::crypt::Binary("01001000 01100101 01101100 01101100 01101111").decode() == "Hello");
+}
+
 /*
 TEST_CASE("Encode Base32") {
     REQUIRE(Tanja84dk::crypt::base32::encode("") == "");
@@ -30,26 +38,26 @@ TEST_CASE("Decode Base32") {
 */
 
 TEST_CASE("Encode Base64") {
-    CHECK(Tanja84dk::crypt::base64::encode("") == "");
-    CHECK(Tanja84dk::crypt::base64::encode("f") == "Zg==");
-    CHECK(Tanja84dk::crypt::base64::encode("fo") == "Zm8=");
-    CHECK(Tanja84dk::crypt::base64::encode("foo") == "Zm9v");
-    CHECK(Tanja84dk::crypt::base64::encode("foob") == "Zm9vYg==");
-    CHECK(Tanja84dk::crypt::base64::encode("fooba") == "Zm9vYmE=");
-    CHECK(Tanja84dk::crypt::base64::encode("foobar") == "Zm9vYmFy");
-    CHECK(Tanja84dk::crypt::base64::encode("Welcome to Ubuntu 22.04.2 LTS (GNU/Linux 5.15.0-76-generic x86_64)") ==
+    CHECK(Tanja84dk::crypt::Base64("").encode() == "");
+    CHECK(Tanja84dk::crypt::Base64("f").encode() == "Zg==");
+    CHECK(Tanja84dk::crypt::Base64("fo").encode() == "Zm8=");
+    CHECK(Tanja84dk::crypt::Base64("foo").encode() == "Zm9v");
+    CHECK(Tanja84dk::crypt::Base64("foob").encode() == "Zm9vYg==");
+    CHECK(Tanja84dk::crypt::Base64("fooba").encode() == "Zm9vYmE=");
+    CHECK(Tanja84dk::crypt::Base64("foobar").encode() == "Zm9vYmFy");
+    CHECK(Tanja84dk::crypt::Base64("Welcome to Ubuntu 22.04.2 LTS (GNU/Linux 5.15.0-76-generic x86_64)").encode() ==
           "V2VsY29tZSB0byBVYnVudHUgMjIuMDQuMiBMVFMgKEdOVS9MaW51eCA1LjE1LjAtNzYtZ2VuZXJpYyB4ODZfNjQp");
 }
 
 TEST_CASE("Decode Base64") {
-    CHECK(Tanja84dk::crypt::base64::decode("") == "");
-    CHECK(Tanja84dk::crypt::base64::decode("Zg==") == "f");
-    CHECK(Tanja84dk::crypt::base64::decode("Zm8=") == "fo");
-    CHECK(Tanja84dk::crypt::base64::decode("Zm9v") == "foo");
-    CHECK(Tanja84dk::crypt::base64::decode("Zm9vYg==") == "foob");
-    CHECK(Tanja84dk::crypt::base64::decode("Zm9vYmE=") == "fooba");
-    CHECK(Tanja84dk::crypt::base64::decode("Zm9vYmFy") == "foobar");
-    CHECK(Tanja84dk::crypt::base64::decode(
-              "V2VsY29tZSB0byBVYnVudHUgMjIuMDQuMiBMVFMgKEdOVS9MaW51eCA1LjE1LjAtNzYtZ2VuZXJpYyB4ODZfNjQp") ==
-          "Welcome to Ubuntu 22.04.2 LTS (GNU/Linux 5.15.0-76-generic x86_64)");
+    CHECK(Tanja84dk::crypt::Base64("").decode() == "");
+    CHECK(Tanja84dk::crypt::Base64("Zg==").decode() == "f");
+    CHECK(Tanja84dk::crypt::Base64("Zm8=").decode() == "fo");
+    CHECK(Tanja84dk::crypt::Base64("Zm9v").decode() == "foo");
+    CHECK(Tanja84dk::crypt::Base64("Zm9vYg==").decode() == "foob");
+    CHECK(Tanja84dk::crypt::Base64("Zm9vYmE=").decode() == "fooba");
+    CHECK(Tanja84dk::crypt::Base64("Zm9vYmFy").decode() == "foobar");
+    CHECK(Tanja84dk::crypt::Base64(
+              "V2VsY29tZSB0byBVYnVudHUgMjIuMDQuMiBMVFMgKEdOVS9MaW51eCA1LjE1LjAtNzYtZ2VuZXJpYyB4ODZfNjQp")
+              .decode() == "Welcome to Ubuntu 22.04.2 LTS (GNU/Linux 5.15.0-76-generic x86_64)");
 }

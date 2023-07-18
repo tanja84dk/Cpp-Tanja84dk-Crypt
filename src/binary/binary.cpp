@@ -7,31 +7,53 @@
 #include <string>
 #include <vector>
 
-std::vector<std::bitset<8>> Tanja84dk::crypt::binary::encode(const std::string &input_data) noexcept {
-  std::vector<std::bitset<8>> binary_output_vector = {};
-  binary_output_vector.clear();
-  binary_output_vector.reserve(100);
+using namespace Tanja84dk::crypt;
 
-  for (std::size_t i = 0; i < input_data.size(); i++) {
-    binary_output_vector.push_back(std::bitset<8>(input_data.c_str()[i]));
-  }
-
-  return binary_output_vector;
+Binary::Binary(const std::string &input_data) noexcept {
+    this->input_data = input_data;
+    this->input_data_length = input_data.size();
 }
 
-std::string Tanja84dk::crypt::binary::decode(const std::string &input_data) noexcept {
-  std::stringstream input_buffer_stringstream = {};
-  std::string output_data_string = {};
-  input_buffer_stringstream.clear();
+std::string Binary::encode() const noexcept {
+    // std::string output_data_string = {};
+    std::vector<std::bitset<8>> buffer_data = this->encode_to_bits();
+    std::stringstream buffer_sstream = {};
 
-  input_buffer_stringstream << input_data;
+    for (auto it = buffer_data.begin(); it != buffer_data.end(); it++) {
+        if (it != buffer_data.begin()) {
+            buffer_sstream << " ";
+        }
+        buffer_sstream << *it;
+    }
 
-  while (input_buffer_stringstream.good()) {
-    std::bitset<8> bits;
-    input_buffer_stringstream >> bits;
-    char bits_decoded_char = char(bits.to_ulong());
-    output_data_string += bits_decoded_char;
-  }
+    return buffer_sstream.str();
+}
 
-  return output_data_string;
+std::vector<std::bitset<8>> Binary::encode_to_bits() const noexcept {
+    std::vector<std::bitset<8>> binary_output_vector = {};
+    binary_output_vector.clear();
+    binary_output_vector.reserve(100);
+
+    for (std::size_t i = 0; i < this->input_data_length; i++) {
+        binary_output_vector.push_back(std::bitset<8>(this->input_data.c_str()[i]));
+    }
+
+    return binary_output_vector;
+}
+
+std::string Binary::decode() const noexcept {
+    std::stringstream input_buffer_stringstream = {};
+    std::string output_data_string = {};
+    input_buffer_stringstream.clear();
+
+    input_buffer_stringstream << this->input_data;
+
+    while (input_buffer_stringstream.good()) {
+        std::bitset<8> bits;
+        input_buffer_stringstream >> bits;
+        char bits_decoded_char = char(bits.to_ulong());
+        output_data_string += bits_decoded_char;
+    }
+
+    return output_data_string;
 }

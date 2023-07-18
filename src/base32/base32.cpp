@@ -2,11 +2,20 @@
 #include <Tanja84dk/crypt/pxx.h>
 #include <base32.h>
 
-std::string Tanja84dk::crypt::base32::decode(const std::string &input_data) noexcept {
+#include <string>
+
+using namespace Tanja84dk::crypt;
+
+Base32::Base32(const std::string &input_data) noexcept {
+    this->input_data = input_data;
+    this->input_data_length = input_data.size();
+}
+
+std::string Base32::decode() const noexcept {
     CryptoPP::Base32Decoder Decoder;
     std::string decoded_string;
 
-    Decoder.Put((CryptoPP::byte *)input_data.data(), input_data.size());
+    Decoder.Put((CryptoPP::byte *)this->input_data.data(), this->input_data_length);
     Decoder.MessageEnd();
 
     CryptoPP::word64 size_word64 = Decoder.MaxRetrievable();
@@ -18,11 +27,11 @@ std::string Tanja84dk::crypt::base32::decode(const std::string &input_data) noex
     return decoded_string;
 }
 
-std::string Tanja84dk::crypt::base32::encode(const std::string &input_data) noexcept {
+std::string Base32::encode() const noexcept {
     CryptoPP::Base32Encoder Encoder;
     std::string encoded_string = {};
 
-    Encoder.Put((CryptoPP::byte *)input_data.data(), input_data.size());
+    Encoder.Put((CryptoPP::byte *)this->input_data.data(), this->input_data_length);
     Encoder.MessageEnd();
 
     CryptoPP::word64 size_word64 = Encoder.MaxRetrievable();
