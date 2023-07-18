@@ -1,14 +1,33 @@
 #include <Tanja84dk/crypt/base64/base64.h>
-#include <Tanja84dk/crypt/pxx.h>
 #include <base64.h>
 
 #include <string>
 
-std::string Tanja84dk::crypt::base64::decode(const std::string &input_data) noexcept {
+using namespace Tanja84dk::crypt;
+
+Base64::Base64(const std::string &input_data) noexcept { this->input_data = input_data; }
+
+std::string Base64::encode() const noexcept {
+    CryptoPP::Base64Encoder Encoder(NULL, false);
+    std::string encoded_string = {};
+
+    Encoder.Put((CryptoPP::byte *)this->input_data.data(), this->input_data.size());
+
+    CryptoPP::word64 size_word64 = Encoder.MaxRetrievable();
+
+    if (size_word64 && size_word64 <= SIZE_MAX) {
+        encoded_string.resize(size_word64);
+        Encoder.Get((CryptoPP::byte *)encoded_string.data(), encoded_string.size());
+    }
+
+    return encoded_string;
+}
+
+std::string Base64::decode() const noexcept {
     CryptoPP::Base64Decoder Decoder;
     std::string decoded_string = {};
 
-    Decoder.Put((CryptoPP::byte *)input_data.data(), input_data.size());
+    Decoder.Put((CryptoPP::byte *)this->input_data.data(), this->input_data.size());
     Decoder.MessageEnd();
 
     CryptoPP::word64 size_word64 = Decoder.MaxRetrievable();
@@ -19,25 +38,4 @@ std::string Tanja84dk::crypt::base64::decode(const std::string &input_data) noex
     }
 
     return decoded_string;
-}
-
-std::string Tanja84dk::crypt::base64::encode(const std::string &input_data) noexcept {
-    // Mayjor flaw in CryptoPP that you have to overule the default constructor
-    // just for it to comply woth RFC 4648 https://datatracker.ietf.org/doc/html/rfc4648
-    // since they for some reason add a newline as default
-    CryptoPP::Base64Encoder Encoder(NULL, false);
-
-    std::string encoded_string = {};
-
-    Encoder.Put((CryptoPP::byte *)input_data.data(), input_data.size());
-    Encoder.MessageEnd();
-
-    CryptoPP::word64 size_word64 = Encoder.MaxRetrievable();
-
-    if (size_word64 && size_word64 <= SIZE_MAX) {
-        encoded_string.resize(size_word64);
-        Encoder.Get((CryptoPP::byte *)encoded_string.data(), encoded_string.size());
-    }
-
-    return encoded_string;
 }
