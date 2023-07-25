@@ -1,17 +1,16 @@
 #include <Tanja84dk/crypt/base64/base64.h>
-#include <base64.h>
 
 #include <string>
 
 using namespace Tanja84dk::crypt;
 
-Base64::Base64(const std::string &input_data) noexcept { this->input_data = input_data; }
+Base64::Base64(const std::string &input_data) noexcept { this->input_data_ = input_data; }
 
 std::string Base64::encode() const noexcept {
     CryptoPP::Base64Encoder Encoder(NULL, false);
     std::string encoded_string = {};
 
-    Encoder.Put((CryptoPP::byte *)this->input_data.data(), this->input_data.size());
+    Encoder.Put((CryptoPP::byte *)this->input_data_.data(), this->input_data_.length());
 
     CryptoPP::word64 size_word64 = Encoder.MaxRetrievable();
 
@@ -27,7 +26,7 @@ std::string Base64::decode() const noexcept {
     CryptoPP::Base64Decoder Decoder;
     std::string decoded_string = {};
 
-    Decoder.Put((CryptoPP::byte *)this->input_data.data(), this->input_data.size());
+    Decoder.Put((CryptoPP::byte *)this->input_data_.data(), this->input_data_.size());
     Decoder.MessageEnd();
 
     CryptoPP::word64 size_word64 = Decoder.MaxRetrievable();

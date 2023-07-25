@@ -1,8 +1,8 @@
 #ifndef TANJA84DK_CRYPT_CEASAR_CEASAR_H
 #define TANJA84DK_CRYPT_CEASAR_CEASAR_H
-#include <Tanja84dk/crypt/pxx.h>
-
 #include <string>
+
+#include "Tanja84dk/crypt/pxx.h"
 
 namespace Tanja84dk {
 namespace crypt {

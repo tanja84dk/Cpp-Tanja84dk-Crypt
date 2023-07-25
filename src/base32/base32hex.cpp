@@ -1,6 +1,5 @@
 #include <Tanja84dk/crypt/base32/base32hex.h>
 #include <Tanja84dk/crypt/pxx.h>
-#include <base32.h>
 
 std::string Tanja84dk::crypt::Base32Hex::decode() const noexcept {
     CryptoPP::Base32HexDecoder Decoder;

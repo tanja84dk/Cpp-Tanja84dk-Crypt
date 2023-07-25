@@ -1,16 +1,18 @@
 #ifndef TANJA84DK_CRYPT_BASE32_BASE32_H
 #define TANJA84DK_CRYPT_BASE32_BASE32_H
-#include <Tanja84dk/crypt/crypt_base_classes.h>
-#include <Tanja84dk/crypt/pxx.h>
+#include <base32.h>
 
 #include <string>
+
+#include "Tanja84dk/crypt/crypt_base_classes.h"
+#include "Tanja84dk/crypt/pxx.h"
 
 namespace Tanja84dk {
 namespace crypt {
 class Base32 : public Tanja84dk::crypt::EncoderBaseInterface {
    private:
-    std::string input_data;
-    std::size_t input_data_length;
+    std::string input_data_ = {};
+    std::size_t input_data_length_ = {};
 
    public:
     Base32(const std::string &input_data) noexcept;
