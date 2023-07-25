@@ -58,8 +58,10 @@ void print_all_licenses() {
     print_title_for_licenses("cryptopp-cmake");
     std::cout << get_cryptopp_cmake_license() << '\n' << '\n';
 
+#ifdef cryptopp_LICENSE
     print_title_for_licenses("cryptopp");
     std::cout << get_cryptopp_license() << '\n' << '\n';
+#endif  // cryptopp_LICENSE
     std::cout << std::flush;
 }
 
