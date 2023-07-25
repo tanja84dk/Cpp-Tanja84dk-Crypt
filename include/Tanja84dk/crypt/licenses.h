@@ -31,36 +31,44 @@ void replace_all(std::string &str, const std::string &from, const std::string &t
 
 }  // namespace
 
+#ifdef tanja84dk_crypt_LICENSE
 std::string get_tanja84dk_crypt_license() {
     std::string license = tanja84dk_crypt_LICENSE;
     replace_all(license, ";", "\n");
     return license;
 };
+#endif  // tanja84dk_crypt_LICENSE
 
+#ifdef cryptopp_cmake_LICENSE
 std::string get_cryptopp_cmake_license() {
     std::string license = cryptopp_cmake_LICENSE;
     replace_all(license, ";", "\n");
     return license;
 };
+#endif  // cryptopp_cmake_LICENSE
 
 #ifdef cryptopp_LICENSE
 std::string get_cryptopp_license() {
     std::string license = cryptopp_LICENSE;
     replace_all(license, ";", "\n");
     return license;
-#endif  // cryptopp_LICENSE
 };
+#endif  // cryptopp_LICENSE
 
 void print_all_licenses() {
-    print_title_for_licenses("tanja84dk_crypt");
-    std::cout << get_tanja84dk_crypt_license() << '\n' << '\n';
+#ifdef tanja84dk_crypt_LICENSE
+    license::print_title_for_licenses("tanja84dk_crypt");
+    std::cout << license::get_tanja84dk_crypt_license() << '\n' << '\n';
+#endif  // tanja84dk_crypt_LICENSE
 
-    print_title_for_licenses("cryptopp-cmake");
-    std::cout << get_cryptopp_cmake_license() << '\n' << '\n';
+#ifdef cryptopp_cmake_LICENSE
+    license::print_title_for_licenses("cryptopp-cmake");
+    std::cout << license::get_cryptopp_cmake_license() << '\n' << '\n';
+#endif  // cryptopp_cmake_LICENSE
 
 #ifdef cryptopp_LICENSE
-    print_title_for_licenses("cryptopp");
-    std::cout << get_cryptopp_license() << '\n' << '\n';
+    license::print_title_for_licenses("cryptopp");
+    std::cout << license::get_cryptopp_license() << '\n' << '\n';
 #endif  // cryptopp_LICENSE
     std::cout << std::flush;
 }
