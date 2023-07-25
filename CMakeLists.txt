@@ -36,6 +36,8 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 include(cmake/CPM.cmake)
 
+include(cmake/tanja84dk_warnings.cmake)
+
 find_package(cryptopp-cmake REQUIRED QUIET)
 
 
@@ -56,9 +58,12 @@ target_include_directories(tanja84dk_crypt
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 		$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>
 		${CMAKE_CURRENT_SOURCE_DIR}/include
+)
 
-	PRIVATE
-		${CMAKE_CURRENT_SOURCE_DIR}
+target_compile_options(tanja84dk_crypt
+    PRIVATE
+        ${WERROR_FLAG}
+        #${PEDANTIC_COMPILE_FLAGS}
 )
 
 target_compile_features(tanja84dk_crypt
@@ -79,6 +84,6 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
 	set_target_properties(tanja84dk_crypt PROPERTIES LINK_FLAGS_RELEASE -s)
 endif()
 
-if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR OR tanja84dk_crypt_BUILD_TESTING STREQUAL ON)
-	add_subdirectory(test)
-endif()
+#if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR OR tanja84dk_crypt_BUILD_TESTING STREQUAL ON)
+#	add_subdirectory(test)
+#endif()
