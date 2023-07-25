@@ -48,7 +48,7 @@ add_library(tanja84dk_crypt ${tanja84dk_crypt_SOURCES} ${tanja84dk_crypt_HEADERS
 add_library(Tanja84dk::crypt ALIAS tanja84dk_crypt)
 
 target_link_libraries(tanja84dk_crypt
-	PRIVATE
+	PUBLIC
 		cryptopp
 )
 

@@ -1,11 +1,10 @@
 #ifndef TANJA84DK_CRYPT_BASE32_MY_BASE64_H
 #define TANJA84DK_CRYPT_BASE32_MY_BASE64_H
 
-#include <base64.h>
-
 #include <string>
 
 #include "Tanja84dk/crypt/crypt_base_classes.h"
+#include "base64.h"
 
 namespace Tanja84dk {
 namespace crypt {

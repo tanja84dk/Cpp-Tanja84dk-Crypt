@@ -4,6 +4,8 @@
 
 #include <string>
 
+#include "base32.h"
+
 using namespace Tanja84dk::crypt;
 
 Base32::Base32(const std::string &input_data) noexcept {
