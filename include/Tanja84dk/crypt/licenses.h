@@ -43,10 +43,12 @@ std::string get_cryptopp_cmake_license() {
     return license;
 };
 
+#ifdef cryptopp_LICENSE
 std::string get_cryptopp_license() {
     std::string license = cryptopp_LICENSE;
     replace_all(license, ";", "\n");
     return license;
+#endif  // cryptopp_LICENSE
 };
 
 void print_all_licenses() {
