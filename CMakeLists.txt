@@ -58,6 +58,7 @@ target_include_directories(tanja84dk_crypt
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 		$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>
 		${CMAKE_CURRENT_SOURCE_DIR}/include
+		$<BUILD_INTERFACE:${cryptopp_SOURCE_DIR}>
 )
 
 target_compile_options(tanja84dk_crypt
