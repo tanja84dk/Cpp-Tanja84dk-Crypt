@@ -1,10 +1,12 @@
+
+
 #include <Tanja84dk/crypt/ceasar/ceasar.h>
 #include <Tanja84dk/crypt/pxx.h>
 
 #include <iostream>
 #include <string>
 
-std::string Tanja84dk::crypt::ceasar::encode(const int chipher_shift_key, const std::string &input_data) {
+std::string Tanja84dk::crypt::Caesar::encode(const int cipher_shift_key, const std::string &input_data) const noexcept {
     std::string output_data_string;
 
     char buffer_char;
@@ -12,7 +14,7 @@ std::string Tanja84dk::crypt::ceasar::encode(const int chipher_shift_key, const 
         buffer_char = input_data[i];
 
         if (buffer_char >= 'a' && buffer_char <= 'z') {
-            buffer_char = buffer_char + chipher_shift_key;
+            buffer_char = buffer_char + cipher_shift_key;
 
             if (buffer_char > 'z') {
                 buffer_char = buffer_char - 'z' + 'a' - 1;
@@ -21,7 +23,7 @@ std::string Tanja84dk::crypt::ceasar::encode(const int chipher_shift_key, const 
             output_data_string += buffer_char;
 
         } else if (buffer_char >= 'A' && buffer_char <= 'Z') {
-            buffer_char = buffer_char + chipher_shift_key;
+            buffer_char = buffer_char + cipher_shift_key;
 
             if (buffer_char > 'Z') {
                 buffer_char = buffer_char - 'Z' + 'a' - 1;
@@ -35,7 +37,7 @@ std::string Tanja84dk::crypt::ceasar::encode(const int chipher_shift_key, const 
     return output_data_string;
 };
 
-std::string Tanja84dk::crypt::ceasar::decode(const int chipher_shift_key, const std::string &input_data) {
+std::string Tanja84dk::crypt::Caesar::decode(const int cipher_shift_key, const std::string &input_data) const noexcept {
     std::string output_data_string;
 
     char buffer_char;
@@ -43,7 +45,7 @@ std::string Tanja84dk::crypt::ceasar::decode(const int chipher_shift_key, const 
         buffer_char = input_data[i];
 
         if (buffer_char >= 'a' && buffer_char <= 'z') {
-            buffer_char = buffer_char - chipher_shift_key;
+            buffer_char = buffer_char - cipher_shift_key;
 
             if (buffer_char < 'a') {
                 buffer_char = buffer_char + 'z' - 'a' + 1;
@@ -52,7 +54,7 @@ std::string Tanja84dk::crypt::ceasar::decode(const int chipher_shift_key, const 
             output_data_string += buffer_char;
 
         } else if (buffer_char >= 'A' && buffer_char <= 'Z') {
-            buffer_char = buffer_char - chipher_shift_key;
+            buffer_char = buffer_char - cipher_shift_key;
 
             if (buffer_char < 'A') {
                 buffer_char = buffer_char + 'Z' - 'A' + 1;
@@ -66,8 +68,8 @@ std::string Tanja84dk::crypt::ceasar::decode(const int chipher_shift_key, const 
     return output_data_string;
 };
 
-void Tanja84dk::crypt::ceasar::decode_brute_force(const std::string &input_data) {
+void Tanja84dk::crypt::Caesar::decode_brute_force(const std::string &input_data) {
     for (int i = 0; i <= 27; i++) {
-        std::cout << "Key: " << i << "\n" << Tanja84dk::crypt::ceasar::decode(i, input_data) << "\n\n\n";
+        std::cout << "Key: " << i << "\n" << this->decode(i, input_data) << "\n\n\n";
     }
 }
