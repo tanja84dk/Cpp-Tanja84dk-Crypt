@@ -1,5 +1,5 @@
-#ifndef TANJA84DK_CRYPT_LICENCES_H
-#define TANJA84DK_CRYPT_LICENCES_H
+#ifndef TANJA84DK_CRYPT_LICENSES_H
+#define TANJA84DK_CRYPT_LICENSES_H
 
 #include <iostream>
 #include <string>
@@ -77,4 +77,4 @@ void print_all_licenses() {
 }  // namespace crypt
 }  // namespace Tanja84dk
 
-#endif  // TANJA84DK_CRYPT_LICENCES_H
+#endif  // TANJA84DK_CRYPT_LICENSES_H
