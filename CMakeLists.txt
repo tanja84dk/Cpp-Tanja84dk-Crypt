@@ -39,6 +39,7 @@ include(cmake/CPM.cmake)
 include(cmake/tanja84dk_warnings.cmake)
 
 find_package(cryptopp-cmake REQUIRED QUIET)
+find_package(renenyffenegger_base64 REQUIRED)
 
 
 include(cmake/get_licenses.cmake)
@@ -50,6 +51,8 @@ add_library(Tanja84dk::crypt ALIAS tanja84dk_crypt)
 target_link_libraries(tanja84dk_crypt
 	PUBLIC
 		cryptopp
+	PRIVATE
+		ReneNyffenegger::base64
 )
 
 target_include_directories(tanja84dk_crypt
@@ -59,6 +62,8 @@ target_include_directories(tanja84dk_crypt
 		$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>
 		${CMAKE_CURRENT_SOURCE_DIR}/include
 		$<BUILD_INTERFACE:${cryptopp_SOURCE_DIR}>
+	PRIVATE
+		$<BUILD_INTERFACE:${renenyffenegger_base64_SOURCE_DIR}/include>
 )
 
 target_compile_options(tanja84dk_crypt
@@ -85,6 +90,6 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
 	set_target_properties(tanja84dk_crypt PROPERTIES LINK_FLAGS_RELEASE -s)
 endif()
 
-#if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR OR tanja84dk_crypt_BUILD_TESTING STREQUAL ON)
-#	add_subdirectory(test)
-#endif()
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR OR tanja84dk_crypt_BUILD_TESTING STREQUAL ON)
+	add_subdirectory(test)
+endif()
