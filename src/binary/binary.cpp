@@ -7,19 +7,15 @@
 #include <string>
 #include <vector>
 
-using namespace Tanja84dk::crypt;
-
-Binary::Binary(const std::string& input_data) noexcept {
+Tanja84dk::crypt::Binary::Binary(const std::string& input_data) noexcept {
     this->input_data = input_data;
     this->input_data_length = input_data.size();
 }
 
-std::string Binary::encode() const noexcept {
+std::string Tanja84dk::crypt::Binary::encode() const noexcept {
     std::string output_data_string = {};
     std::vector<std::bitset<8>> buffer_data = this->encode_to_bits();
-    for (std::vector<std::bitset<8>>::iterator i = buffer_data.begin(); i != buffer_data.end(); i++) {
-        std::cout << *i << ' ';
-    }
+
     std::ostringstream buffer_sstream = {};
 
     for (std::vector<std::bitset<8>>::iterator it = buffer_data.begin(); it != buffer_data.end(); it++) {
@@ -34,7 +30,7 @@ std::string Binary::encode() const noexcept {
     return output_data_string;
 }
 
-std::vector<std::bitset<8>> Binary::encode_to_bits() const noexcept {
+std::vector<std::bitset<8>> Tanja84dk::crypt::Binary::encode_to_bits() const noexcept {
     std::vector<std::bitset<8>> binary_output_vector = {};
     binary_output_vector.clear();
     binary_output_vector.reserve(100);
@@ -46,9 +42,9 @@ std::vector<std::bitset<8>> Binary::encode_to_bits() const noexcept {
     return binary_output_vector;
 }
 
-std::string Binary::decode() const noexcept {
-    std::string result;
-    std::bitset<8> bits;
+std::string Tanja84dk::crypt::Binary::decode() const noexcept {
+    std::string result = {};
+    std::bitset<8> bits = {};
 
     std::istringstream sstream(this->input_data);
 
@@ -63,9 +59,10 @@ std::string Binary::decode() const noexcept {
     return result;
 }
 
-std::string Binary::binary_vector_string_to_ascii(const std::vector<std::string>& binary_strings) noexcept {
-    std::string result;
-    std::bitset<8> bits;
+std::string Tanja84dk::crypt::Binary::binary_vector_string_to_ascii(
+    const std::vector<std::string>& binary_strings) noexcept {
+    std::string result = {};
+    std::bitset<8> bits = {};
 
     for (const std::string& binary_string : binary_strings) {
         bits = std::bitset<8>(binary_string);

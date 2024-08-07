@@ -12,13 +12,13 @@ namespace Tanja84dk {
 namespace crypt {
 class Binary : public Tanja84dk::crypt::EncoderBaseInterface {
    private:
-    std::string input_data;
-    std::size_t input_data_length;
+    std::string input_data = {};
+    std::size_t input_data_length = {};
 
    public:
     Binary(const std::string& input_data) noexcept;
-    /// @brief Decoding 8bit string seperated with spaces for each 8 bit chunks
-    /// @return The ascii reconvertion of the binary string as a string
+    /// @brief Decoding 8bit string separated with spaces for each 8 bit chunks
+    /// @return The ascii reconversion of the binary string as a string
     std::string decode() const noexcept override;
     std::string encode() const noexcept override;
     std::string binary_vector_string_to_ascii(const std::vector<std::string>& binary_strings) noexcept;
