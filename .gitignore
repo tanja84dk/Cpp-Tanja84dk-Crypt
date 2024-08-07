@@ -1,5 +1,7 @@
 [Bb]uild/
 [Oo]ut/
+[Bb]ak/
+[Tt]mp/
 *.bak
 *.tmp
 *.sh
