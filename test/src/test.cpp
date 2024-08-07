@@ -14,6 +14,18 @@ TEST_CASE("Binary Decode") {
     CHECK(Tanja84dk::crypt::Binary("01001000 01100101 01101100 01101100 01101111").decode() == "Hello");
 }
 
+TEST_CASE("Binary With spaces and ! Encode") {
+    CHECK(Tanja84dk::crypt::Binary("this was a triumph!!!").encode() ==
+          "01110100 01101000 01101001 01110011 00100000 01110111 01100001 01110011 00100000 01100001 00100000 01110100 "
+          "01110010 01101001 01110101 01101101 01110000 01101000 00100001 00100001 00100001");
+}
+TEST_CASE("Binary With spaces and ! Decode") {
+    CHECK(Tanja84dk::crypt::Binary(
+              "01110100 01101000 01101001 01110011 00100000 01110111 01100001 01110011 00100000 01100001 00100000 "
+              "01110100 01110010 01101001 01110101 01101101 01110000 01101000 00100001 00100001 00100001")
+              .decode() == "this was a triumph!!!");
+}
+
 /*
 TEST_CASE("Encode Base32") {
     REQUIRE(Tanja84dk::crypt::base32::encode("") == "");
