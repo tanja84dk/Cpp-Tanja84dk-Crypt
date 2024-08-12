@@ -38,7 +38,6 @@ include(cmake/CPM.cmake)
 
 include(cmake/tanja84dk_warnings.cmake)
 
-find_package(cryptopp-cmake REQUIRED QUIET)
 find_package(renenyffenegger_base64 REQUIRED)
 
 
@@ -49,8 +48,6 @@ add_library(tanja84dk_crypt ${tanja84dk_crypt_SOURCES} ${tanja84dk_crypt_HEADERS
 add_library(Tanja84dk::crypt ALIAS tanja84dk_crypt)
 
 target_link_libraries(tanja84dk_crypt
-	PUBLIC
-		cryptopp
 	PRIVATE
 		ReneNyffenegger::base64
 )
@@ -61,7 +58,6 @@ target_include_directories(tanja84dk_crypt
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 		$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>
 		${CMAKE_CURRENT_SOURCE_DIR}/include
-		$<BUILD_INTERFACE:${cryptopp_SOURCE_DIR}>
 	PRIVATE
 		$<BUILD_INTERFACE:${renenyffenegger_base64_SOURCE_DIR}/include>
 )
