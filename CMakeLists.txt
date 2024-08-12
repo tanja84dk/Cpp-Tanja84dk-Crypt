@@ -17,16 +17,12 @@ option(tanja84dk_crypt_BUILD_TESTING OFF)
 set(tanja84dk_crypt_HEADERS
   include/Tanja84dk/crypt/crypt_base_classes.h
   include/Tanja84dk/crypt/licenses.h
-  include/Tanja84dk/crypt/base32/base32.h
-  include/Tanja84dk/crypt/base32/base32hex.h
   include/Tanja84dk/crypt/base64/base64.h
   include/Tanja84dk/crypt/binary/binary.h
   include/Tanja84dk/crypt/ceasar/ceasar.h
 )
 
 set(tanja84dk_crypt_SOURCES
-  src/base32/base32.cpp
-  src/base32/base32hex.cpp
   src/base64/base64.cpp
   src/binary/binary.cpp
   src/ceasar/ceasar.cpp
