@@ -6,12 +6,13 @@
 #include <iostream>
 #include <string>
 
-std::string Tanja84dk::crypt::Caesar::encode(const int cipher_shift_key, const std::string &input_data) const noexcept {
+std::string Tanja84dk::crypt::Caesar::encode(const int cipher_shift_key,
+                                             const std::string &input_data_string) const noexcept {
     std::string output_data_string;
 
     char buffer_char;
-    for (int i = 0; i != input_data.length(); i++) {
-        buffer_char = input_data[i];
+    for (int i = 0; i != input_data_string.length(); i++) {
+        buffer_char = input_data_string[i];
 
         if (buffer_char >= 'a' && buffer_char <= 'z') {
             buffer_char = buffer_char + cipher_shift_key;
@@ -37,12 +38,13 @@ std::string Tanja84dk::crypt::Caesar::encode(const int cipher_shift_key, const s
     return output_data_string;
 };
 
-std::string Tanja84dk::crypt::Caesar::decode(const int cipher_shift_key, const std::string &input_data) const noexcept {
+std::string Tanja84dk::crypt::Caesar::decode(const int cipher_shift_key,
+                                             const std::string &input_data_string) const noexcept {
     std::string output_data_string;
 
     char buffer_char;
-    for (int i = 0; i != input_data.length(); i++) {
-        buffer_char = input_data[i];
+    for (int i = 0; i != input_data_string.length(); i++) {
+        buffer_char = input_data_string[i];
 
         if (buffer_char >= 'a' && buffer_char <= 'z') {
             buffer_char = buffer_char - cipher_shift_key;
