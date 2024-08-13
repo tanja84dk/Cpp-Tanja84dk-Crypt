@@ -39,21 +39,13 @@ std::string get_tanja84dk_crypt_license() {
 };
 #endif  // tanja84dk_crypt_LICENSE
 
-#ifdef cryptopp_cmake_LICENSE
-std::string get_cryptopp_cmake_license() {
-    std::string license = cryptopp_cmake_LICENSE;
+#ifdef renenyffenegger_base64_LICENSE
+std::string get_renenyffenegger_base64_license() {
+    std::string license = renenyffenegger_base64_LICENSE;
     replace_all(license, ";", "\n");
     return license;
 };
-#endif  // cryptopp_cmake_LICENSE
-
-#ifdef cryptopp_LICENSE
-std::string get_cryptopp_license() {
-    std::string license = cryptopp_LICENSE;
-    replace_all(license, ";", "\n");
-    return license;
-};
-#endif  // cryptopp_LICENSE
+#endif  // renenyffenegger_base64_LICENSE
 
 void print_all_licenses() {
 #ifdef tanja84dk_crypt_LICENSE
@@ -61,15 +53,11 @@ void print_all_licenses() {
     std::cout << license::get_tanja84dk_crypt_license() << '\n' << '\n';
 #endif  // tanja84dk_crypt_LICENSE
 
-#ifdef cryptopp_cmake_LICENSE
-    license::print_title_for_licenses("cryptopp-cmake");
-    std::cout << license::get_cryptopp_cmake_license() << '\n' << '\n';
-#endif  // cryptopp_cmake_LICENSE
+#ifdef renenyffenegger_base64_LICENSE
+    license::print_title_for_licenses("renenyffenegger_base64");
+    std::cout << license::get_renenyffenegger_base64_license() << '\n' << '\n';
+#endif  // renenyffenegger_base64_LICENSE
 
-#ifdef cryptopp_LICENSE
-    license::print_title_for_licenses("cryptopp");
-    std::cout << license::get_cryptopp_license() << '\n' << '\n';
-#endif  // cryptopp_LICENSE
     std::cout << std::flush;
 }
 
