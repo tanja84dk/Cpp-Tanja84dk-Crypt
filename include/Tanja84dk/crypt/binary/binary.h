@@ -16,7 +16,7 @@ class Binary : public Tanja84dk::crypt::EncoderBaseInterface {
     std::size_t input_data_length = {};
 
    public:
-    Binary(const std::string& input_data) noexcept;
+    Binary(const std::string& data_string) noexcept;
     /// @brief Decoding 8bit string separated with spaces for each 8 bit chunks
     /// @return The ascii reconversion of the binary string as a string
     std::string decode() const noexcept override;

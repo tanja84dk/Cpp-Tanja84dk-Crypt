@@ -7,9 +7,9 @@
 #include <string>
 #include <vector>
 
-Tanja84dk::crypt::Binary::Binary(const std::string& input_data) noexcept {
-    this->input_data = input_data;
-    this->input_data_length = input_data.size();
+Tanja84dk::crypt::Binary::Binary(const std::string& input_data_string) noexcept {
+    this->input_data = input_data_string;
+    this->input_data_length = input_data_string.size();
 }
 
 std::string Tanja84dk::crypt::Binary::encode() const noexcept {
