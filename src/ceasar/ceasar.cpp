@@ -11,11 +11,11 @@ std::string Tanja84dk::crypt::Caesar::encode(const int cipher_shift_key,
     std::string output_data_string;
 
     char buffer_char;
-    for (int i = 0; i != input_data_string.length(); i++) {
+    for (size_t i = 0; i != input_data_string.length(); i++) {
         buffer_char = input_data_string[i];
 
         if (buffer_char >= 'a' && buffer_char <= 'z') {
-            buffer_char = buffer_char + cipher_shift_key;
+            buffer_char = buffer_char + static_cast<char>(cipher_shift_key);
 
             if (buffer_char > 'z') {
                 buffer_char = buffer_char - 'z' + 'a' - 1;
@@ -24,7 +24,7 @@ std::string Tanja84dk::crypt::Caesar::encode(const int cipher_shift_key,
             output_data_string += buffer_char;
 
         } else if (buffer_char >= 'A' && buffer_char <= 'Z') {
-            buffer_char = buffer_char + cipher_shift_key;
+            buffer_char = buffer_char + static_cast<char>(cipher_shift_key);
 
             if (buffer_char > 'Z') {
                 buffer_char = buffer_char - 'Z' + 'a' - 1;
@@ -43,11 +43,11 @@ std::string Tanja84dk::crypt::Caesar::decode(const int cipher_shift_key,
     std::string output_data_string;
 
     char buffer_char;
-    for (int i = 0; i != input_data_string.length(); i++) {
+    for (size_t i = 0; i != input_data_string.length(); i++) {
         buffer_char = input_data_string[i];
 
         if (buffer_char >= 'a' && buffer_char <= 'z') {
-            buffer_char = buffer_char - cipher_shift_key;
+            buffer_char = buffer_char - static_cast<char>(cipher_shift_key);
 
             if (buffer_char < 'a') {
                 buffer_char = buffer_char + 'z' - 'a' + 1;
@@ -56,7 +56,7 @@ std::string Tanja84dk::crypt::Caesar::decode(const int cipher_shift_key,
             output_data_string += buffer_char;
 
         } else if (buffer_char >= 'A' && buffer_char <= 'Z') {
-            buffer_char = buffer_char - cipher_shift_key;
+            buffer_char = buffer_char - static_cast<char>(cipher_shift_key);
 
             if (buffer_char < 'A') {
                 buffer_char = buffer_char + 'Z' - 'A' + 1;

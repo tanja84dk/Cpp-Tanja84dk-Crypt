@@ -61,7 +61,7 @@ target_include_directories(tanja84dk_crypt
 target_compile_options(tanja84dk_crypt
     PRIVATE
         ${WERROR_FLAG}
-        #${PEDANTIC_COMPILE_FLAGS}
+        ${PEDANTIC_COMPILE_FLAGS}
 )
 
 target_compile_features(tanja84dk_crypt
